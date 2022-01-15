@@ -3,6 +3,7 @@
   --title-text-color: #212121;
   --accent-color: #2196f3;
   --secondery-footer-color: rgba(255 255 255 0.6);
+  --transition-funktion: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -87,6 +88,7 @@ nav a {
   color: var(--accent-color);
 }
 .site-nav-link {
+  position: relative;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
@@ -94,6 +96,17 @@ nav a {
   color: var(--title-text-color);
   text-decoration: none;
 }
+.current::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  left: 0;
+  bottom: 0;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
+
 .contacts-list {
   display: flex;
   margin-left: auto;
@@ -118,6 +131,10 @@ nav a {
   margin-right: 10px;
   fill: currentColor;
 }
+.site-nav-link,
+.contact-link {
+  transition: color 250ms var(--transition-funktion);
+}
 
 /* .mail::before {
   content: '';
@@ -139,7 +156,10 @@ nav a {
   padding: 200px 0;
   max-width: 1600px;
   margin: 0 auto;
-  background-image: linear-gradient(rgba(47, 48, 58, 0.4), rgba(47, 48, 58, 0.4)),
+  background-image: linear-gradient(
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
     url(../images/hero-img.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -179,6 +199,7 @@ nav a {
   border: transparent;
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  transition: background-color 250ms var(--transition-funktion);
 }
 /* ------------------------FEATURES--------------------------------- */
 .features-list {
@@ -263,6 +284,23 @@ nav a {
   flex-basis: calc(100% / 4 - 30px);
   margin-right: 30px;
 }
+.techniques-wrap {
+  position: relative;
+}
+.overlay-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 27px 0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: rgba(47, 48, 58, 0.8);
+}
 
 /* ------------------------TEAM--------------------------------- */
 .team {
@@ -326,11 +364,13 @@ nav a {
   border-radius: 50%;
   justify-content: center;
   align-items: center;
+  transition: background-color 250ms var(--transition-funktion);
   /* color: #afb1b8; */
 }
 .team-icon {
   /* fill: currentColor; */
   fill: #afb1b8;
+  transition: fill 250ms var(--transition-funktion);
 }
 .team-link:hover,
 .team-link:focus {
@@ -366,6 +406,7 @@ nav a {
   color: #afb1b8;
   border: 1px solid;
   border-radius: 4px;
+  transition: color 250ms var(--transition-funktion);
 }
 .clients-icon {
   fill: currentColor;
@@ -422,6 +463,7 @@ address {
   letter-spacing: 0.03em;
   color: var(--secondery-footer-color);
   text-decoration: none;
+  transition: color 250ms var(--transition-funktion);
 }
 .footer-contact-link:hover,
 .footer-contact-link:focus {
@@ -448,6 +490,7 @@ address {
   height: 44px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 250ms var(--transition-funktion);
 }
 .footer-icon-item:not(:last-child) {
   margin-right: 10px;
@@ -482,6 +525,9 @@ address {
   border: none;
   border-radius: 4px;
   padding: 5px 22px;
+  transition: background-color 250ms var(--transition-funktion),
+    box-shadow 250ms var(--transition-funktion),
+    color 250ms var(--transition-funktion);
 }
 .filter-button:hover,
 .filter-button:focus {
@@ -490,7 +536,7 @@ address {
   box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
     0px 2px 2px rgba(0, 0, 0, 0.12);
 }
-.filter-button.current {
+.current-button {
   background-color: var(--accent-color);
   color: #ffffff;
 }
@@ -509,6 +555,7 @@ address {
 .card-link {
   display: block;
   text-decoration: none;
+  transition: box-shadow 250ms var(--transition-funktion);
 }
 .card-link:hover,
 .card-link:focus {
@@ -534,6 +581,71 @@ address {
   font-size: 16px;
   line-height: 1.87;
   letter-spacing: 0.03em;
+  color: var(--primeri-text-color);
+}
+.portfolio-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.portfolio-overlay-text {
+  position: absolute;
+  top: 100%;
+  height: 100%;
+  padding: 63px 24px;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  background-color: rgba(33, 150, 243, 0.9);
+  transition: transform 250ms var(--transition-funktion);
+}
+.card-link:hover .portfolio-overlay-text,
+.card-link:focus .portfolio-overlay-text {
+  transform: translateY(-100%);
+}
+/* ------------------------MODAL WINDOW--------------------------------- */
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1);
+  transition: transform 250ms var(--transition-funktion),
+    visibility 250ms var(--transition-funktion),
+    opacity 250ms var(--transition-funktion);
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 528px;
+  min-height: 581px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.25);
 }
 /* ------------------------OTHER--------------------------------- */
 
